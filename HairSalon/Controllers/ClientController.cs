@@ -14,10 +14,10 @@ namespace HairSalon.Controllers
       return View(stylist);
     }
 
-    [HttpPost("/items/delete")]
+    [HttpPost("/clients/delete")]
     public ActionResult DeleteAll()
     {
-        Item.ClearAll();
+        Client.DeleteAll();
         return View();
     }
   }

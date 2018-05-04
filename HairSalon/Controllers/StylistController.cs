@@ -24,7 +24,7 @@ namespace HairSalon.Controllers
         [HttpPost("/stylists")]
         public ActionResult Create()
         {
-            Stylist newCategory = new Stylist(Request.Form["category-name"]);
+            Stylist newCategory = new Stylist(Request.Form["stylist-name"]);
             List<Stylist> allStylists = Stylist.GetAll();
             return View("Index", allStylists);
         }
@@ -34,24 +34,24 @@ namespace HairSalon.Controllers
         {
             Dictionary<string, object> model = new Dictionary<string, object>();
             Stylist selectedStylist = Stylist.Find(id);
-            List<Item> stylistClients = selectedStylist.GetItems();
-            model.Add("category", selectedStylist);
-            model.Add("items", stylistClients);
+            List<Client> stylistClients = selectedStylist.GetClients();
+            model.Add("stylist", selectedStylist);
+            model.Add("clients", stylistClients);
             return View(model);
         }
 
 
-        [HttpPost("/items")]
+        [HttpPost("/clients")]
         public ActionResult CreateItem()
         {
           Dictionary<string, object> model = new Dictionary<string, object>();
-          Stylist foundCategory = Stylist.Find(Int32.Parse(Request.Form["category-id"]));
-          string itemDescription = Request.Form["item-description"];
-          Item newItem = new Item(itemDescription);
-          foundCategory.AddItem(newItem);
-          List<Item> stylistClients = foundCategory.GetItems();
-          model.Add("items", stylistClients);
-          model.Add("category", foundCategory);
+          Stylist foundStylist = Stylist.Find(Int32.Parse(Request.Form["stylist-id"]));
+          string clientName = Request.Form["client-name"];
+          Client newClient = new Client(clientName);
+          // foundStylist.AddClient(newClient);
+          List<Client> stylistClients = foundStylist.GetClients();
+          model.Add("clients", stylistClients);
+          model.Add("stylist", foundStylist);
           return View("Details", model);
         }
     }
