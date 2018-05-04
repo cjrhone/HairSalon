@@ -1,5 +1,6 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using HairSalon.Models;
+using System.Collections.Generic;
 using System;
 
 namespace HairSalon.Tests
@@ -28,6 +29,18 @@ namespace HairSalon.Tests
         Client secondClient = new Client("James");
 
         Assert.AreEqual(firstClient, secondClient);
+      }
+
+      [TestMethod]
+      public void Save_SavesToDatabase_ClientList()
+      {
+        Client testClient = new Client("James");
+
+        testClient.Save();
+        List<Client> result = Client.GetAll();
+        List<Client> testList = new List<Client>{testClient};
+
+        CollectionAssert.AreEqual(testList, result);
       }
 
     public ClientTests()
