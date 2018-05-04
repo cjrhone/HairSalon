@@ -116,21 +116,21 @@ namespace HairSalon.Models
     }
     //...including an if statement that disposes of the connection if it's not null.
 
-    // public override bool Equals(System.Object otherClient)
-    //   {
-    //     if (!(otherClient is Client))
-    //     {
-    //       return false;
-    //     }
-    //     else
-    //     {
-    //       Client newClient = (Client) otherClient;
-    //       bool idEquality = (this.GetId() == newClient.GetId());
-    //       //when we change an object from one type to another, its called "TYPE CASTING"
-    //       bool nameEquality = (this.GetName() == newClient.GetName());
-    //       return (idEquality && nameEquality);
-    //     }
-    //   }
+    public override bool Equals(System.Object otherClient)
+      {
+        if (!(otherClient is Client))
+        {
+          return false;
+        }
+        else
+        {
+          Client newClient = (Client) otherClient;
+          bool idEquality = (this.GetId() == newClient.GetId());
+          //when we change an object from one type to another, its called "TYPE CASTING"
+          bool nameEquality = (this.GetName() == newClient.GetName());
+          return (idEquality && nameEquality);
+        }
+      }
 
       public static Client Find(int id)
         {

@@ -21,6 +21,15 @@ namespace HairSalon.Tests
         Assert.AreEqual(0, result);
       }
 
+      [TestMethod]
+      public void Equals_ReturnsTrueIfNamesAreTheSame_Client()
+      {
+        Client firstClient = new Client("James");
+        Client secondClient = new Client("James");
+
+        Assert.AreEqual(firstClient, secondClient);
+      }
+
     public ClientTests()
       {
         DBConfiguration.ConnectionString = "server=localhost;user id=root;password=root;port=8889;database=HairSalon_Test;";
