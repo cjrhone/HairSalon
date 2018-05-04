@@ -62,9 +62,9 @@ namespace HairSalon.Models
       conn.Open();
       //passes conn to --> database connection
       //open database
-      cmd.CommandText = @"SELECT * FROM Clients;";
       MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
       //passes cmd --> MySqlCommand for...
+      cmd.CommandText = @"SELECT * FROM Clients;";
       MySqlDataReader rdr = cmd.ExecuteReader() as MySqlDataReader;
       //showing all clients from database
       while(rdr.Read())
@@ -75,7 +75,7 @@ namespace HairSalon.Models
         int clientId = rdr.GetInt32(0);
         string clientName = rdr.GetString(1);
         //will receive the first column of data, where our Client's id values are stored (index 0)
-        Client newItem = new Client(itemDescription, clientId);
+        Client newItem = new Client(clientName, clientId);
         //will receive the second column data, where our Client descriptions are stored (index 1)
         allClients.Add(newItem);
         //instantiate new name with receieved paramaters
@@ -93,7 +93,7 @@ namespace HairSalon.Models
     }
     //otherwise show all clients from database
 
-    public static void ClearAll()
+    public static void DeleteAll()
     {
       MySqlConnection conn = DB.Connection();
       conn.Open();
@@ -116,26 +116,26 @@ namespace HairSalon.Models
     }
     //...including an if statement that disposes of the connection if it's not null.
 
-    public override bool Equals(System.Object otherItem)
-      {
-        if (!(otherClient is Client))
-        {
-          return false;
-        }
-        else
-        {
-          Client newClient = (Client) otherClient;
-          bool idEquality = (this.GetId() == newClient.GetId());
-          //when we change an object from one type to another, its called "TYPE CASTING"
-          bool nameEquality = (this.GetName() == newClient.GetName());
-          return (idEquality && nameEquality);
-        }
-      }
+    // public override bool Equals(System.Object otherClient)
+    //   {
+    //     if (!(otherClient is Client))
+    //     {
+    //       return false;
+    //     }
+    //     else
+    //     {
+    //       Client newClient = (Client) otherClient;
+    //       bool idEquality = (this.GetId() == newClient.GetId());
+    //       //when we change an object from one type to another, its called "TYPE CASTING"
+    //       bool nameEquality = (this.GetName() == newClient.GetName());
+    //       return (idEquality && nameEquality);
+    //     }
+    //   }
 
       public static Client Find(int id)
         {
           MySqlConnection conn = DB.Connection();
-          conn.Open()
+          conn.Open();
 
           var cmd = conn.CreateCommand() as MySqlCommand;
           cmd.CommandText = @"SELECT * FROM 'items' WHERE id = @thisId;";
@@ -173,7 +173,7 @@ namespace HairSalon.Models
             conn.Dispose();
           }
 
-          return foundClient
+          return foundClient;
       }
    }
 }
