@@ -1,0 +1,15 @@
+<h1>Client List</h1>
+<h3><a href='/stylists'>View stylists</a></h3>
+<h3><a href='/stylists/new'>Add a new stylist</a></h>
+
+<ul>
+  @foreach(var client in Model)
+  {
+    <li>@client.GetName()</li>
+  }
+</ul>
+<p><a href="/clients/new">Add another client</a></p>
+
+<form action="/clients/delete" method="post">
+  <button type="submit" name="button">Clear All Clients</button>
+</form>

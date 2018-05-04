@@ -1,0 +1,7 @@
+<h1>Add a new client to @Model.GetName()</h1>
+<form action='/clients' method='post'>
+  <input id='stylist-id' name='stylist-id' type='hidden' value='@Model.GetId()'>
+  <label for='client-name'>Client Name</label>
+  <input id='client-name' name='client-name' type='text'>
+  <button type='submit'>Add client</button>
+</form>
